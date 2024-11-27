@@ -32,3 +32,9 @@ Harmony Headlines aims to present news stories about the Israel-Palestine confli
 - Allow users to adjust the tone of the news displayed via a slider or toggle.
 
 ---
+
+--
+
+# Steps
+
+- create news card component - populate with hardcoded data. show only img, title, date, author and source
