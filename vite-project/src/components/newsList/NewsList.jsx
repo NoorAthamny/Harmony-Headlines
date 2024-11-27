@@ -1,44 +1,21 @@
+import { useEffect, useState } from "react";
 import News from "../news/News";
 import "./newsList.css";
+import { Link } from "react-router-dom";
+import { fetchNews } from "../../api";
 
 const NewsList = () => {
-  const newsArray = [
-    {
-      title: "Omg News",
-      source: "BBC",
-      author: "Random Name : )",
-      date: "Nov 27, 2024",
-      image:
-        "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-    },
+  const [newsArray, setNewsArray] = useState([]);
 
-    {
-      title: "Omg News",
-      source: "BBC",
-      author: "Random Name : )",
-      date: "Nov 27, 2024",
-      image:
-        "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-    },
+  useEffect(() => {
+    fetchNews()
+      .then((data) => {
+        setNewsArray(data.data || []);
+        console.log(data);
+      })
+      .catch((error) => console.error("Failed to fetch news:", error));
+  }, []);
 
-    {
-      title: "Omg News",
-      source: "BBC",
-      author: "Random Name : )",
-      date: "Nov 27, 2024",
-      image:
-        "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-    },
-
-    {
-      title: "Omg News",
-      source: "BBC",
-      author: "Random Name : )",
-      date: "Nov 27, 2024",
-      image:
-        "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-    },
-  ];
   return (
     <article className="list-news">
       <section>
@@ -46,14 +23,15 @@ const NewsList = () => {
       </section>
       <section>
         {newsArray.map((news, index) => (
-          <News
-            key={index}
-            title={news.title}
-            source={news.source}
-            author={news.author}
-            date={news.date}
-            image={news.image}
-          />
+          <Link key={index} to="/article" state={{ news }}>
+            <News
+              title={news.title}
+              source={news.source}
+              author={news.author}
+              date={news.published_at}
+              image={news.image}
+            />
+          </Link>
         ))}
       </section>
     </article>

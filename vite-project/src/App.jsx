@@ -3,19 +3,15 @@ import "./App.css";
 import News from "./components/news/News";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NewsList from "./components/newsList/NewsList";
+import Article from "./components/article/Article";
 
 const routerPath = createBrowserRouter([
-  // { path: "/", element: <Home /> },
+  { path: "/", element: <NewsList /> },
+  { path: "/article", element: <Article /> },
 ]);
-{
-  /* <RouterProvider router={routerPath} /> */
-}
+
 function App() {
-  return (
-    <>
-      <NewsList />
-    </>
-  );
+  return <RouterProvider router={routerPath} />;
 }
 
 export default App;
