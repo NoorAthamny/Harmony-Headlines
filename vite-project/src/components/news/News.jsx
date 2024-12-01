@@ -4,9 +4,11 @@ import "./news.css";
 const News = ({ title, source, author, date, image }) => {
   return (
     <article className="card-art">
-      <section>
-        <img src={image} alt={title} />
-      </section>
+      {image && (
+        <section>
+          <img src={image} alt={title} />
+        </section>
+      )}
 
       <section className="text">
         <h2>{title}</h2>
